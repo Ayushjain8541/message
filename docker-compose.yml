@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    networks:
+      - app-network
+
+  frontend:
+    build: ./vite-project
+    volumes:
+      - ./vite-project:/app
+
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+networks:
+  app-network:
